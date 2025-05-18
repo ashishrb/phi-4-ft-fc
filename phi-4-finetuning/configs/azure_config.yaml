@@ -1,0 +1,46 @@
+config:
+    AZURE_SUBSCRIPTION_ID: "<Enter Azure Subscription ID>"  # Please modify to your subscription
+    AZURE_RESOURCE_GROUP: "rg-746582ai"  # Please modify to your Azure resource group
+    AZURE_WORKSPACE: "ms-session-2-uk-south"  # Please modify to your Azure workspace
+    AZURE_SFT_DATA_NAME: "phi4-fc-ft-data-v1"  # Please modify to your AzureML data name
+    SFT_DATA_DIR: "./data/processed"  # Matches our structure
+    CLOUD_DIR: "./logs"  # Changed to use our logs directory 
+    HF_MODEL_NAME_OR_PATH: "microsoft/Phi-4-mini-instruct"
+    HF_TOKEN: "<Enter HF Token>"  # Please modify to your Hugging Face token
+    IS_DEBUG: true
+    USE_LOWPRIORITY_VM: false
+
+train:
+    azure_env_name: "phi4-fc-finetuning-env-v1"  # Please modify to your AzureML env name
+    azure_compute_cluster_name: "phi4-compute-cluster"
+    azure_compute_cluster_size: "Standard_NC24ads_A100_v4"  # 24 cores, 220 GB RAM, 64 GB disk
+    docker_image_path: "./docker/Dockerfile"  # Points to our Dockerfile
+    epoch: 5
+    train_batch_size: 8
+    eval_batch_size: 8
+    model_dir: "./checkpoints"  # Matches our checkpoints directory
+    results_dir: "./results"    # Matches our results directory
+    logging_dir: "./logs"       # Matches our logs directory
+    wandb_api_key: ""  # Please modify to your W&B API key if you want to use W&B
+    wandb_project: "phi4-finetuning"
+    wandb_watch: "gradients"
+    
+    # Additional training hyperparameters specific for Phi-4
+    learning_rate: 2e-5
+    warmup_ratio: 0.03
+    weight_decay: 0.01
+    gradient_accumulation_steps: 4
+    lr_scheduler_type: "cosine"
+    logging_steps: 10
+    save_strategy: "epoch"
+    save_total_limit: 3
+    evaluation_strategy: "epoch"
+    fp16: true
+
+# Model saving configuration
+model_save:
+    output_dir: "./results/phi4-finetuned"  # Inside our results directory
+    save_format: ["safetensors", "pytorch"]
+    push_to_hub: false
+    download_to_local: true
+    local_dir: "./results/local_model"  # Local directory for downloaded model
