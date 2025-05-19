@@ -138,34 +138,34 @@ class AzureJobManager:
             logger.error(f"Error ensuring compute exists: {str(e)}")
             raise
 
-def _check_compute_quota(self, vm_size: str) -> None:
-    """
-    Check if there's enough quota for the specified VM size
-    
-    Args:
-        vm_size: VM size to check quota for
-    """
-    try:
-        # A100 specific check
-        if "a100" in vm_size.lower():
-            logger.info(f"Checking quota for A100 GPU VM: {vm_size}")
-            
-            # Get subscription and region from config
-            subscription_id = self.config['config']['AZURE_SUBSCRIPTION_ID']
-            
-            # We can't directly query quota through the SDK, so we'll just log a warning
-            logger.warning(f"A100 GPUs have limited availability. Please ensure your subscription has enough quota for {vm_size} VMs.")
-            print(f"\nNOTE: A100 GPUs have limited availability. Please ensure your subscription {subscription_id} has enough quota for {vm_size} VMs.\n")
+    def _check_compute_quota(self, vm_size: str) -> None:
+        """
+        Check if there's enough quota for the specified VM size
         
-        # General advice for checking quotas
-        print("\nNOTE: If job submission fails due to quota issues, you can check your quotas in the Azure Portal:")
-        print("1. Go to https://portal.azure.com")
-        print("2. Navigate to 'Subscriptions' > Your subscription > 'Usage + quotas'")
-        print("3. Check for the relevant VM family quota\n")
-        
-    except Exception as e:
-        logger.warning(f"Error checking compute quota: {str(e)}")
-        # Continue anyway as this is just a warning
+        Args:
+            vm_size: VM size to check quota for
+        """
+        try:
+            # A100 specific check
+            if "a100" in vm_size.lower():
+                logger.info(f"Checking quota for A100 GPU VM: {vm_size}")
+                
+                # Get subscription and region from config
+                subscription_id = self.config['config']['AZURE_SUBSCRIPTION_ID']
+                
+                # We can't directly query quota through the SDK, so we'll just log a warning
+                logger.warning(f"A100 GPUs have limited availability. Please ensure your subscription has enough quota for {vm_size} VMs.")
+                print(f"\nNOTE: A100 GPUs have limited availability. Please ensure your subscription {subscription_id} has enough quota for {vm_size} VMs.\n")
+            
+            # General advice for checking quotas
+            print("\nNOTE: If job submission fails due to quota issues, you can check your quotas in the Azure Portal:")
+            print("1. Go to https://portal.azure.com")
+            print("2. Navigate to 'Subscriptions' > Your subscription > 'Usage + quotas'")
+            print("3. Check for the relevant VM family quota\n")
+            
+        except Exception as e:
+            logger.warning(f"Error checking compute quota: {str(e)}")
+            # Continue anyway as this is just a warning
     
     def display_and_confirm_hyperparameters(self) -> bool:
         """
