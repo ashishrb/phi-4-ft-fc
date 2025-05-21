@@ -1,0 +1,51 @@
+# Azure ML SDK
+azure-ai-ml==1.12.0
+azure-identity==1.15.0
+mlflow==2.10.0
+azureml-mlflow==1.54.0
+azureml-dataprep==4.13.0
+
+# Hugging Face packages
+transformers~=4.49.0
+datasets~=3.4.0
+accelerate==0.27.2
+peft==0.14.0
+bitsandbytes==0.41.3
+deepspeed==0.13.1
+evaluate==0.4.1
+tokenizers==0.15.1
+
+# ML utilities
+scikit-learn==1.6.1
+numpy>=1.23.5
+pandas~=2.2
+
+# Training monitoring
+wandb==0.16.2
+tensorboard==2.15.1
+
+# Environment and configuration
+python-dotenv==1.0.1
+pyyaml==6.0.1
+
+# Utilities and logging
+psutil==5.9.8
+rich==13.7.0
+coloredlogs==15.0.1
+tqdm==4.66.2
+
+# Visualization
+matplotlib
+plotly
+Jinja2
+
+# Model optimization
+einops==0.8.1
+onnx>=1.18.0
+onnxruntime>=1.21.0
+onnxscript>=0.2.2
+
+# OpenAI (if needed for comparison)
+# openai~=1.66.3
+
+#pip install git+https://github.com/microsoft/Olive
