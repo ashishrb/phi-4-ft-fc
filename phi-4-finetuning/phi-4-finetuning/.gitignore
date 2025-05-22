@@ -1,0 +1,42 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE files
+.vscode/
+.idea/
+
+# Project specific
+data/raw/*
+data/processed/*
+checkpoints/*
+logs/*
+results/*
+.env
+*.log
+
+# Azure ML
+.azureml/
+.runs/
+
+# Model files
+*.bin
+*.pt
+*.ckpt
+*.safetensors
